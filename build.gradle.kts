@@ -30,9 +30,11 @@ idea {
 
 dependencies {
     implementation("org.apache.commons:commons-lang3:3.9")
-    implementation("com.opencsv:opencsv:3.7")
+    implementation("com.opencsv:opencsv:5.4")
     testImplementation("junit:junit:4.12")
     testImplementation("org.assertj:assertj-core:3.13.2")
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 
