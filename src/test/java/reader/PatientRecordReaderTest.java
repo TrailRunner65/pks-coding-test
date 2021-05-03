@@ -33,8 +33,6 @@ public class PatientRecordReaderTest {
 
         PatientRecord firstRecord = patientRecords.get(0);
         assertEquals("1", firstRecord.getPatientId());
-        //assertEquals(firstRecord.getPatientId(), );
-
     }
 
 }

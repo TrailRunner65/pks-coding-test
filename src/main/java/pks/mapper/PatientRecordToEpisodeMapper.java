@@ -1,26 +1,30 @@
 package pks.mapper;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.SneakyThrows;
 import pks.domain.Episode;
 import pks.domain.Gender;
 import pks.reader.PatientRecord;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PatientRecordToEpisodeMapper {
-    public Map<ImmutablePair<Date, Integer>, Episode> mapToEpisodes(List<PatientRecord> patientRecords) {
-        final Map<ImmutablePair<Date, Integer>, Episode> episodes = new HashMap<>();
+
+    @SneakyThrows
+    public Map<RecordKey, Episode> mapToEpisodes(List<PatientRecord> patientRecords) {
+        final Map<RecordKey, Episode> episodes = new HashMap<>();
         for (PatientRecord record : patientRecords) {
-            ImmutablePair<Date, Integer> key = new ImmutablePair(record.getDate(), record.getPatientId());
+            RecordKey key = new RecordKey(record.getDate(), record.getPatientId());
             if (episodes.containsKey(key)) {
                 mapAttribute(record.getAttributeName(), record.getAttributeValue(), episodes.get(key));
             } else {
               Episode newEpisode = Episode.builder()
-                      .patientId(Integer.valueOf(record.getPatientId().trim()))  // FIXME - remove trim
-                      .date(new Date()) // FIXME - Format and set real date
+                      .patientId(Integer.valueOf(record.getPatientId()))
+                      .date(new SimpleDateFormat("yyyy-MM-dd").parse(record.getDate()))
                       .build();
               mapAttribute(record.getAttributeName(), record.getAttributeValue(), newEpisode);
               episodes.put(key, newEpisode);
@@ -31,16 +35,33 @@ public class PatientRecordToEpisodeMapper {
 
     private Episode mapAttribute(String sourceKey, String sourceValue, Episode target) {
         switch (sourceKey) {
-            case " Age":
-                target.setAge(Integer.valueOf(sourceValue.trim())); // FIXME - remove trim
+            case "Age":
+                target.setAge(Integer.valueOf(sourceValue));
                 break;
-            case " Gender":
+            case "Gender":
                 target.setGender(Gender.valueOf(sourceValue));
                 break;
-            case " Blood pressure":
-                target.setBloodPressure(Integer.valueOf(sourceValue.trim())); // FIXME - remove trim
+            case "Blood pressure":
+                target.setBloodPressure(Integer.valueOf(sourceValue));
+                break;
+            case "Diabetes":
+                target.setDiabetes(Boolean.valueOf(sourceValue));
+                break;
+            case "WCG":
+                target.setWcg(Integer.valueOf(sourceValue));
+                break;
+            case "Glucose":
+                target.setGlucose(Float.valueOf(sourceValue));
                 break;
         }
         return target;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static
+    class RecordKey {
+       String date;
+       String patientId;
     }
 }

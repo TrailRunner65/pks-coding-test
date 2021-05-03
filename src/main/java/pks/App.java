@@ -4,7 +4,10 @@ public class App {
 
 	public static void main(String[] args) {
 
-		PatientData patientData = null; // TODO read messages.csv
+		PatientDataService patiendDataService = new PatientDataService();
+
+		PatientData patientData = new PatientDataImpl();
+		//patiendDataService.getPatientData(); // TODO read messages.csv
 
 		System.out.println("Number of patients: " + patientData.getNumberOfPatients());
 		System.out.println("Number of episodes: " + patientData.getNumberOfEpisodes());

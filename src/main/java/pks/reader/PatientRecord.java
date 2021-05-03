@@ -1,12 +1,9 @@
 package pks.reader;
 
 import com.opencsv.bean.CsvBindByPosition;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,4 +19,20 @@ public class PatientRecord {
 
     @CsvBindByPosition(position = 3)
     private String attributeValue;
+
+    public void setDate(String date) {
+        this.date = date.trim();
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId.trim();
+    }
+
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName.trim();
+    }
+
+    public void setAttributeValue(String attributeValue) {
+        this.attributeValue = attributeValue.trim();
+    }
 }
