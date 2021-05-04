@@ -15,9 +15,10 @@ public class Episode {
     private Date date;
     private Integer patientId;
     private Integer age;
-    private Gender gender;
+    @Builder.Default
+    private String gender = "U";
     private Integer bloodPressure;
     private Float glucose;
-    private Integer wcg;
+    private Integer wcc;
     private Boolean diabetes;
 }

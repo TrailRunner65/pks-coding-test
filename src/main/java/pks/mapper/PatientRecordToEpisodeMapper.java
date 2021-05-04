@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.SneakyThrows;
 import pks.domain.Episode;
-import pks.domain.Gender;
 import pks.reader.PatientRecord;
 
 import java.text.SimpleDateFormat;
@@ -39,7 +38,7 @@ public class PatientRecordToEpisodeMapper {
                 target.setAge(Integer.valueOf(sourceValue));
                 break;
             case "Gender":
-                target.setGender(Gender.valueOf(sourceValue));
+                target.setGender(sourceValue);
                 break;
             case "Blood pressure":
                 target.setBloodPressure(Integer.valueOf(sourceValue));
@@ -47,8 +46,8 @@ public class PatientRecordToEpisodeMapper {
             case "Diabetes":
                 target.setDiabetes(Boolean.valueOf(sourceValue));
                 break;
-            case "WCG":
-                target.setWcg(Integer.valueOf(sourceValue));
+            case "WCC":
+                target.setWcc(Integer.valueOf(sourceValue));
                 break;
             case "Glucose":
                 target.setGlucose(Float.valueOf(sourceValue));

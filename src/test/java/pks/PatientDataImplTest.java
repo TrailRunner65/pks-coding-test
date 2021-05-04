@@ -17,21 +17,24 @@ public class PatientDataImplTest {
     @Test
     public void shouldGetAverageAgeOfMalePatients() {
         double averageAge = patientData.getAverageAgeByGender("M");
-        assertEquals(4, averageAge);
+        assertEquals(24.0, averageAge, 0);
     }
 
     @Test
     public void shouldGetAverageAgeOfFemalePatients() {
-
+        double averageAge = patientData.getAverageAgeByGender("F");
+        assertEquals(24.5, averageAge, 0);
     }
 
     @Test
     public void shouldGetNumberOfEpisodes() {
-
+        long numEpisodes = patientData.getNumberOfEpisodes();
+        assertEquals(4, numEpisodes);
     }
 
     @Test
     public void shouldGetNumberOfPatients() {
-
+       long numPatients = patientData.getNumberOfPatients();
+       assertEquals(3, numPatients);
     }
 }

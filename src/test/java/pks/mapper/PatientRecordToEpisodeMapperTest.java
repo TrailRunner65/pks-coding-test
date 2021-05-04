@@ -80,7 +80,7 @@ public class PatientRecordToEpisodeMapperTest {
         assertEquals(130, bloodPressure.intValue());
         
         Float glucose = episodes.get(key).getGlucose();
-        assertEquals(11.1f, glucose, 1);
+        assertEquals(11.1f, glucose, 0);
     }
 
     @Test
@@ -90,12 +90,7 @@ public class PatientRecordToEpisodeMapperTest {
         Map<PatientRecordToEpisodeMapper.RecordKey, Episode> episodes = patientRecordToEpisodeMapper.mapToEpisodes(patientRecords);
 
         assertNotNull(episodes);
-        assertEquals(1, episodes.size());
-
-        PatientRecordToEpisodeMapper.RecordKey key = new PatientRecordToEpisodeMapper.RecordKey("2020-12-09", "1");
-        assertNotNull(episodes.get(key));
-        Integer bloodPressure = episodes.get(key).getBloodPressure();
-        assertEquals(160, bloodPressure.intValue());
+        assertEquals(4, episodes.size());
     }
 
     private List<PatientRecord> getMockRecord() {

@@ -1,5 +1,10 @@
 package pks;
 
+import pks.mapper.PatientRecordToEpisodeMapper;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public class PatientDataImpl implements PatientData {
 
     private final PatientDataService patentDataService;
@@ -15,16 +20,12 @@ public class PatientDataImpl implements PatientData {
 
     @Override
     public long getNumberOfPatients() {
- /*       patentDataService.getPatientData()
-            .entrySet().stream()
-                .filter(x -> {
-                    if (!x.getValue().getPatientId().contains("amazon") && !x.getValue().contains("digital")) {
-                        return true;
-                    }
-                    return false;
-                })
-                .map(map -> map.getValue());*/
-        return 0;
+        Set<PatientRecordToEpisodeMapper.RecordKey> keys = patentDataService.getPatientData().keySet();
+        Set patientSet = new HashSet();
+        for(PatientRecordToEpisodeMapper.RecordKey key: keys) {
+            patientSet.add(key.getPatientId());
+        }
+        return patientSet.size();
     }
 
     @Override
